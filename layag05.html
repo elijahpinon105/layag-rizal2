@@ -24,6 +24,7 @@ body{background:#f6f8fb;color:#0f172a}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:60}.modal.show{display:flex}.modal-box{background:#fff;border-radius:16px;padding:18px;width:92%;max-width:400px}
 .hidden{display:none}.star{font-size:26px;color:#e2e8f0;cursor:pointer}.star.active{color:#f59e0b}.small{font-size:12px;color:#64748b}
 .tabsContent{padding:0 24px 24px}.loginFull{position:fixed;inset:0;z-index:100;background:#f6f8fb;display:flex;align-items:center;justify-content:center}
+.payBox{border:1px solid #e2e8f0;border-radius:12px;padding:10px;margin-top:8px;background:#f8fafc}
 @media(max-width:900px){.hero{grid-template-columns:1fr}}
 </style>
 </head>
@@ -56,7 +57,25 @@ body{background:#f6f8fb;color:#0f172a}
 <div id="tab-customer" class="tabsContent"><div class="hero"><div>
 <h1>Deliver better<br>in <span>Rizal.</span></h1><p class="small">Web-Based Courier and Logistics Tracking System for Rizal Province.</p>
 <div class="card"><div class="small" style="letter-spacing:2px;font-weight:800;color:#14b8a6;text-align:center">YOUR RIZAL ROUTE PLANNED</div><div class="route">📍 Pick-up<select id="pickup" class="input" onchange="updateRoute()"><option>Taytay, Rizal</option><option>Cainta, Rizal</option><option>Antipolo, Rizal</option><option>Angono, Rizal</option><option>Binangonan, Rizal</option></select>📍 Drop-off<select id="dropoff" class="input" onchange="updateRoute()"><option>Cainta, Rizal</option><option>Taytay, Rizal</option><option>Antipolo, Rizal</option><option>Angono, Rizal</option></select></div></div>
-<div class="card"><b>📦 Book a Delivery - Rizal Only</b><div class="grid2" style="margin-top:8px"><div>Sender<input id="sender" class="input" value="Juan"></div><div>Receiver<input id="receiver" class="input" value="Maria"></div></div>Weight (kg)<input id="weight" type="number" min="0" value="2" class="input" oninput="calcFee()">Item<input id="item" class="input" placeholder="Documents"><div class="grid3" style="margin-top:8px"><div class="vehicle active" id="veh-motorcycle" onclick="selectVeh('Motorcycle')">🏍️<br><b>Moto</b><div class="small">₱65</div></div><div class="vehicle" id="veh-car" onclick="selectVeh('Car')">🚗<br><b>Car</b><div class="small">₱165</div></div><div class="vehicle" id="veh-van" onclick="selectVeh('Van')">🚐<br><b>Van</b><div class="small">₱265</div></div></div><div class="grid2" style="margin-top:10px"><div><span class="small">Fixed Rider</span><select id="riderOpt" class="input"><option>Auto Assign Rider</option><option>Fixed Rider - Kuya Jay</option></select></div><div><span class="small">Payment Method</span><select id="pay" class="input"><option>Cash</option><option>Card</option><option>E-Wallet</option></select></div></div><button class="btn" onclick="createBooking()" style="margin-top:8px">Confirm Booking - ₱<span id="fee">165</span></button><span id="createMsg" class="small"></span></div></div><div><div class="card"><b>Route Preview</b><div class="small" id="routePreview" style="margin-top:6px"></div><div style="margin-top:12px;height:140px;background:#f1f5f9;border-radius:12px;display:flex;align-items:center;justify-content:center" class="small">Map Preview (Rizal Only)</div></div><div class="card"><b>Shipment</b><div class="small">Fee = base + max(0,w-5)*10</div><div style="margin-top:8px"><span class="badge b-Booked-Rizal">Rizal Only</span> <span id="shipmentFee" style="font-weight:800"></span></div><div id="latest" style="margin-top:12px"></div></div></div></div></div>
+<div class="card"><b>📦 Book a Delivery - Rizal Only</b><div class="grid2" style="margin-top:8px"><div>Sender<input id="sender" class="input" value="Juan"></div><div>Receiver<input id="receiver" class="input" value="Maria"></div></div>Weight (kg)<input id="weight" type="number" min="0" value="2" class="input" oninput="calcFee()">Item<input id="item" class="input" placeholder="Documents"><div class="grid3" style="margin-top:8px"><div class="vehicle active" id="veh-motorcycle" onclick="selectVeh('Motorcycle')">🏍️<br><b>Moto</b><div class="small">₱65</div></div><div class="vehicle" id="veh-car" onclick="selectVeh('Car')">🚗<br><b>Car</b><div class="small">₱165</div></div><div class="vehicle" id="veh-van" onclick="selectVeh('Van')">🚐<br><b>Van</b><div class="small">₱265</div></div></div><div class="grid2" style="margin-top:10px"><div><span class="small">Fixed Rider</span><select id="riderOpt" class="input"><option>Auto Assign Rider</option><option>Fixed Rider - Kuya Jay</option></select></div><div><span class="small">Payment Method</span><select id="pay" class="input" onchange="updatePayFields()"><option>Cash</option><option>Card</option><option>E-Wallet</option></select></div></div>
+
+<div id="cardFields" class="payBox hidden">
+<b>💳 Card Details</b>
+<select id="cardType" class="input"><option>Visa</option><option>Mastercard</option><option>JCB</option><option>American Express (AmEx)</option></select>
+<input id="cardNumber" class="input" placeholder="Card Number - 16 digits" maxlength="19" oninput="formatCard()">
+<div class="grid2"><div><input id="cardExp" class="input" placeholder="MM/YY" maxlength="5"><span class="small">Expiry</span></div><div><input id="cardCVV" class="input" placeholder="CVV" maxlength="4" type="password"><span class="small">CVV</span></div></div>
+<input id="cardName" class="input" placeholder="Cardholder Name">
+<div class="small">✅ Supported: Visa, Mastercard, JCB, AmEx</div>
+</div>
+
+<div id="eWalletFields" class="payBox hidden">
+<b>📱 E-Wallet - Authorized</b>
+<select id="eWalletType" class="input"><option>GCash</option><option>Maya (PayMaya)</option><option>GrabPay</option><option>ShopeePay</option></select>
+<input id="eWalletNumber" class="input" placeholder="E-Wallet Number - 09XXXXXXXXX" maxlength="11">
+<div class="small" style="margin-top:4px">✅ Authorized: GCash, Maya, GrabPay, ShopeePay</div>
+</div>
+
+<button class="btn" onclick="createBooking()" style="margin-top:10px">Confirm Booking - ₱<span id="fee">165</span></button><span id="createMsg" class="small"></span></div></div><div><div class="card"><b>Route Preview</b><div class="small" id="routePreview" style="margin-top:6px"></div><div style="margin-top:12px;height:140px;background:#f1f5f9;border-radius:12px;display:flex;align-items:center;justify-content:center" class="small">Map Preview (Rizal Only)</div></div><div class="card"><b>Shipment</b><div class="small">Fee = base + max(0,w-5)*10</div><div style="margin-top:8px"><span class="badge b-Booked-Rizal">Rizal Only</span> <span id="shipmentFee" style="font-weight:800"></span></div><div id="latest" style="margin-top:12px"></div></div></div></div></div>
 
 <div id="tab-rider" class="tabsContent hidden"><div class="card"><h3>Rider Dashboard</h3><div id="riderL" style="margin-top:10px"></div></div></div>
 <div id="tab-tracking" class="tabsContent hidden"><div class="card"><h3>Tracking Details</h3><input id="trackId" class="input" placeholder="LAYAG-RIZAL-XXXXXX"><button class="btn-sm btn" onclick="doTrack()">Track</button><div id="trackRes" style="margin-top:10px"></div></div></div>
@@ -79,10 +98,27 @@ let user=JSON.parse(localStorage.getItem('layag_user')||'null');
 let bookings=getBookings();
 if(!user){document.getElementById('loginScreen').style.display='flex';}else{ document.getElementById('loginScreen').style.display='none'; document.getElementById('roleBadge').innerText=user.role; }
 
+function updatePayFields(){
+ let v=document.getElementById('pay').value;
+ document.getElementById('cardFields').classList.toggle('hidden', v!=='Card');
+ document.getElementById('eWalletFields').classList.toggle('hidden', v!=='E-Wallet');
+}
+function formatCard(){
+ let el=document.getElementById('cardNumber');
+ let v=el.value.replace(/\D/g,'').substring(0,16);
+ el.value=v.replace(/(.{4})/g,'$1 ').trim();
+ // auto detect card type
+ let first=v.charAt(0);
+ let typeSel=document.getElementById('cardType');
+ if(first==='4') typeSel.value='Visa';
+ else if(first==='5') typeSel.value='Mastercard';
+ else if(first==='3') typeSel.value='American Express (AmEx)';
+}
+
 async function doLogin(){
  let email=document.getElementById('lEmail').value.trim(), pass=document.getElementById('lPass').value, role=document.getElementById('lRole').value;
  let payload={email,password:pass,role};
- try{ let r=await fetch(API_BASE+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); let d=await r.json(); if(r.ok) payload={...payload,...d}; }catch(e){ console.warn('Offline login, local fallback'); }
+ try{ let r=await fetch(API_BASE+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); let d=await r.json(); if(r.ok) payload={...payload,...d}; }catch(e){}
  localStorage.setItem('layag_user',JSON.stringify({name:email.split('@')[0],email,role}));
  document.getElementById('loginScreen').style.display='none';
  document.getElementById('roleBadge').innerText=role;
@@ -96,18 +132,32 @@ function selectVeh(v){selected=v;document.querySelectorAll('.vehicle').forEach(e
 function calcFee(){let w=Math.max(0,parseFloat(document.getElementById('weight').value)||0);let base=selected==='Motorcycle'?65:selected==='Car'?165:265;fee=base+Math.max(0,w-5)*10;document.getElementById('fee').innerText=fee;document.getElementById('shipmentFee').innerText='₱'+fee+' | '+w+'kg | '+selected;}
 function updateRoute(){let a=document.getElementById('pickup').value,b=document.getElementById('dropoff').value,d=getDist(a,b);document.getElementById('routePreview').innerHTML=a.split(',')[0]+' → '+b.split(',')[0]+'<br>'+d+' km • Rizal Province';calcFee();}
 async function tryApi(p){try{let r=await fetch(API_BASE+'/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});let d=await r.json();if(!r.ok)throw new Error();return d;}catch(e){return null;}}
-async function createBooking(){let w=Math.max(0,parseFloat(document.getElementById('weight').value)||0);let a=document.getElementById('pickup').value,b=document.getElementById('dropoff').value;let id='LAYAG-RIZAL-'+Date.now().toString().slice(-6);let payload={trackingId:id,tracking_id:id,pickup:a,dropoff:b,sender:document.getElementById('sender').value,receiver:document.getElementById('receiver').value,weight:w,item:document.getElementById('item').value,transportation:selected,deliveryFee:fee,fee:fee,paymentMethod:document.getElementById('pay').value,payment_method:document.getElementById('pay').value,riderOption:document.getElementById('riderOpt').value,fixedRider:document.getElementById('riderOpt').value,status:'Processing',createdAt:new Date().toISOString(),rating:null,review:null,distance:getDist(a,b)};let api=await tryApi(payload);if(api&&api.trackingId)payload={...payload,...api};bookings.unshift(payload);saveBookings();document.getElementById('createMsg').innerText=' ✅ '+id;render();}
+async function createBooking(){
+ let w=Math.max(0,parseFloat(document.getElementById('weight').value)||0);let a=document.getElementById('pickup').value,b=document.getElementById('dropoff').value;
+ let payM=document.getElementById('pay').value;
+ let payDetails={};
+ if(payM==='Card'){
+  payDetails={type:document.getElementById('cardType').value, number:document.getElementById('cardNumber').value, exp:document.getElementById('cardExp').value, name:document.getElementById('cardName').value, cardBrand:document.getElementById('cardType').value};
+  if(payDetails.number.replace(/\s/g,'').length<16){alert('Kulang Card Number');return;}
+ }else if(payM==='E-Wallet'){
+  payDetails={type:document.getElementById('eWalletType').value, number:document.getElementById('eWalletNumber').value};
+  if(payDetails.number.length<11){alert('Kulang E-Wallet Number');return;}
+ }
+ let id='LAYAG-RIZAL-'+Date.now().toString().slice(-6);
+ let payload={trackingId:id,tracking_id:id,pickup:a,dropoff:b,sender:document.getElementById('sender').value,receiver:document.getElementById('receiver').value,weight:w,item:document.getElementById('item').value,transportation:selected,deliveryFee:fee,fee:fee,paymentMethod:payM,payment_method:payM,paymentDetails:payDetails,cardType:payDetails.cardBrand||'',eWalletType:payDetails.type||'',riderOption:document.getElementById('riderOpt').value,fixedRider:document.getElementById('riderOpt').value,status:'Processing',createdAt:new Date().toISOString(),rating:null,review:null,distance:getDist(a,b)};
+ let api=await tryApi(payload);if(api&&api.trackingId)payload={...payload,...api};bookings.unshift(payload);saveBookings();document.getElementById('createMsg').innerText=' ✅ '+id+' - '+payM+(payDetails.type?' ('+payDetails.type+')':'');render();
+}
 function render(){
- document.getElementById('latest').innerHTML=bookings.slice(0,2).map(b=>`<div class="card" style="background:#f8fafc;padding:10px"><b>${b.trackingId}</b> ${b.pickup.split(',')[0]}→${b.dropoff.split(',')[0]} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">₱${b.deliveryFee} | ${b.paymentMethod} | ${b.fixedRider}</div></div>`).join('')||'<span class="small">No shipment</span>';
+ document.getElementById('latest').innerHTML=bookings.slice(0,2).map(b=>`<div class="card" style="background:#f8fafc;padding:10px"><b>${b.trackingId}</b> ${b.pickup.split(',')[0]}→${b.dropoff.split(',')[0]} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">₱${b.deliveryFee} | ${b.paymentMethod}${b.cardType?' - '+b.cardType:''}${b.eWalletType?' - '+b.eWalletType:''} | ${b.fixedRider}</div></div>`).join('')||'<span class="small">No shipment</span>';
  let list=filter==='all'?bookings:bookings.filter(b=>b.status===filter);
- document.getElementById('hist').innerHTML=list.map(b=>{let idx=bookings.indexOf(b);return `<div class="card"><b>${b.trackingId}</b> ${b.transportation} ₱${b.deliveryFee} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">${b.pickup}→${b.dropoff} | ${b.weight}kg | ${b.paymentMethod} | ${b.fixedRider}</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${b.status==='Processing'?`<button class="btn-sm btn-outline" onclick="openEdit(${idx})">Edit</button><button class="btn-sm btn-outline" onclick="resched(${idx})">Resched</button><button class="btn-sm btn-danger" onclick="cancelB(${idx})">Cancel</button>`:''}${b.status==='Delivered'&&!b.rating?`<button class="btn-sm btn" onclick="openRate(${idx})">Rate</button>`:''}${b.rating?`<span class="small">⭐${b.rating} ${b.review||''}</span>`:''}</div></div>`}).join('')||'<span class="small">No parcels</span>';
+ document.getElementById('hist').innerHTML=list.map(b=>{let idx=bookings.indexOf(b);return `<div class="card"><b>${b.trackingId}</b> ${b.transportation} ₱${b.deliveryFee} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">${b.pickup}→${b.dropoff} | ${b.weight}kg | ${b.paymentMethod}${b.cardType?' - '+b.cardType:''}${b.eWalletType?' - '+b.eWalletType:''} | ${b.fixedRider}</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${b.status==='Processing'?`<button class="btn-sm btn-outline" onclick="openEdit(${idx})">Edit</button><button class="btn-sm btn-outline" onclick="resched(${idx})">Resched</button><button class="btn-sm btn-danger" onclick="cancelB(${idx})">Cancel</button>`:''}${b.status==='Delivered'&&!b.rating?`<button class="btn-sm btn" onclick="openRate(${idx})">Rate</button>`:''}${b.rating?`<span class="small">⭐${b.rating} ${b.review||''}</span>`:''}</div></div>`}).join('')||'<span class="small">No parcels</span>';
  document.getElementById('riderL').innerHTML=bookings.filter(b=>b.status!=='Cancelled').map(b=>{let idx=bookings.indexOf(b);return `<div class="card"><b>${b.trackingId}</b> ${b.pickup.split(',')[0]}→${b.dropoff.split(',')[0]} - ${b.fixedRider}<br><select class="input" onchange="updateStatus(${idx},this.value)"><option ${b.status==='Processing'?'selected':''}>Processing</option><option ${b.status==='Pick-up'?'selected':''}>Pick-up</option><option ${b.status==='In Transit'?'selected':''}>In Transit</option><option ${b.status==='Out for Delivery'?'selected':''}>Out for Delivery</option><option ${b.status==='Delivered'?'selected':''}>Delivered</option></select></div>`}).join('')||'<span class="small">No assigned</span>';
- document.getElementById('adminL').innerHTML=bookings.map(b=>`<div class="card"><b>${b.trackingId}</b> ${b.sender}→${b.receiver} <span class="${badgeClass(b.status)}">${b.status}</span> ₱${b.deliveryFee} ${b.paymentMethod}</div>`).join('')||'<span class="small">No data</span>';
+ document.getElementById('adminL').innerHTML=bookings.map(b=>`<div class="card"><b>${b.trackingId}</b> ${b.sender}→${b.receiver} <span class="${badgeClass(b.status)}">${b.status}</span> ₱${b.deliveryFee} ${b.paymentMethod}${b.cardType?' - '+b.cardType:''}${b.eWalletType?' - '+b.eWalletType:''}</div>`).join('')||'<span class="small">No data</span>';
 }
 function filterParcels(f){filter=f;document.getElementById('payHist').classList.add('hidden');document.getElementById('hist').classList.remove('hidden');render();}
-function showPayHist(){document.getElementById('hist').classList.add('hidden');document.getElementById('payHist').classList.remove('hidden');document.getElementById('payHist').innerHTML=bookings.map(b=>`<div class="card"><b>${b.trackingId}</b> ${b.paymentMethod} ₱${b.deliveryFee} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">${new Date(b.createdAt).toLocaleString()}</div></div>`).join('');}
+function showPayHist(){document.getElementById('hist').classList.add('hidden');document.getElementById('payHist').classList.remove('hidden');document.getElementById('payHist').innerHTML=bookings.map(b=>`<div class="card"><b>${b.trackingId}</b> ${b.paymentMethod}${b.cardType?' - '+b.cardType:''}${b.eWalletType?' - '+b.eWalletType:''} ₱${b.deliveryFee} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">${new Date(b.createdAt).toLocaleString()}</div></div>`).join('');}
 function trackTop(){let id=document.getElementById('topTrack').value.trim();document.getElementById('trackId').value=id;switchTab('tracking',document.getElementById('b-tracking'));doTrack();}
-function doTrack(){let id=document.getElementById('trackId').value.trim();let b=bookings.find(x=>x.trackingId===id||x.tracking_id===id);document.getElementById('trackRes').innerHTML=b?`<div class="card"><b>${b.trackingId}</b> <span class="${badgeClass(b.status)}">${b.status}</span><div>${b.pickup}→${b.dropoff}</div><div class="small">${b.distance}km | ₱${b.deliveryFee} | ${b.paymentMethod}</div></div>`:'<span class="small">Not found</span>';}
+function doTrack(){let id=document.getElementById('trackId').value.trim();let b=bookings.find(x=>x.trackingId===id||x.tracking_id===id);document.getElementById('trackRes').innerHTML=b?`<div class="card"><b>${b.trackingId}</b> <span class="${badgeClass(b.status)}">${b.status}</span><div>${b.pickup}→${b.dropoff}</div><div class="small">${b.distance}km | ₱${b.deliveryFee} | ${b.paymentMethod}${b.cardType?' - '+b.cardType:''}${b.eWalletType?' - '+b.eWalletType:''}</div></div>`:'<span class="small">Not found</span>';}
 function openEdit(i){editIdx=i;document.getElementById('ePick').value=bookings[i].pickup;document.getElementById('eDrop').value=bookings[i].dropoff;document.getElementById('eW').value=bookings[i].weight;document.getElementById('editM').classList.add('show');}
 function doEdit(){if(editIdx!==null){bookings[editIdx].pickup=document.getElementById('ePick').value;bookings[editIdx].dropoff=document.getElementById('eDrop').value;bookings[editIdx].weight=Math.max(0,parseFloat(document.getElementById('eW').value)||0);let base=bookings[editIdx].transportation==='Motorcycle'?65:bookings[editIdx].transportation==='Car'?165:265;bookings[editIdx].deliveryFee=base+Math.max(0,bookings[editIdx].weight-5)*10;bookings[editIdx].fee=bookings[editIdx].deliveryFee;bookings[editIdx].distance=getDist(bookings[editIdx].pickup,bookings[editIdx].dropoff);saveBookings();closeM();render();}}
 function cancelB(i){if(confirm('Cancel?')){bookings[i].status='Cancelled';saveBookings();render();}}
@@ -119,7 +169,7 @@ function updateStatus(i,v){bookings[i].status=v;saveBookings();render();}
 function closeM(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show'));}
 function saveProfile(){let n=document.getElementById('pName').value,e=document.getElementById('pEmail').value;let u=JSON.parse(localStorage.getItem('layag_user')||'{}');u.name=n;u.email=e;localStorage.setItem('layag_user',JSON.stringify(u));document.getElementById('pMsg').innerText=' Saved';}
 function toggleEye(){let el=document.getElementById('pPass');el.type=el.type==='password'?'text':'password';}
-updateRoute();render();
+updateRoute();updatePayFields();render();
 </script>
 </body>
 </html>
