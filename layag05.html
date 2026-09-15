@@ -1,179 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Layag Rizal - Final Complete (Customer + Rider + Tracking)</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Layag Rizal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#F6F5EF;--navy:#101F3C;--teal:#1EB7A6;--teal-light:#E6F7F5;--border:#E8E6DE;--muted:#6B7280;--light-blue:#EAF2F7}
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;background:var(--cream);color:var(--navy)}
-nav{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;background:var(--cream);flex-wrap:wrap;gap:10px}
-.logo{font-weight:800;display:flex;gap:8px;align-items:center}.logo span{width:32px;height:32px;background:var(--navy);color:white;display:grid;place-items:center;border-radius:8px;font-size:12px}
-.mode{display:flex;background:white;border:1px solid var(--border);border-radius:999px;padding:3px}.mode button{border:none;background:transparent;padding:7px 16px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer}.mode button.active{background:var(--navy);color:white}
-.track-bar{padding:14px 24px;background:white;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
-.track-bar.input{display:flex;gap:6px;background:#F9F8F5;border:1px solid var(--border);border-radius:999px;padding:4px 4px 4px 14px;min-width:300px;align-items:center}
-.track-bar input{border:none;background:transparent;outline:none;width:100%;font-size:12px;font-weight:700;letter-spacing:1px}
-.btn{border:none;border-radius:999px;padding:10px 18px;font-weight:700;cursor:pointer}.btn-teal{background:var(--teal);color:white}.btn-navy{background:var(--navy);color:white}.btn-ghost{background:white;border:1px solid var(--border)}
-.card{background:white;border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
-.hero{padding:28px 24px;display:grid;grid-template-columns:1.1fr.9fr;gap:20px}.hero h1{font-size:48px;line-height:.9;letter-spacing:-1.5px;font-weight:800}.hero h1 span{color:var(--teal)}
-.route-field{display:flex;gap:8px;background:#F9F8F5;border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px}.route-field select{border:none;background:transparent;outline:none;width:100%;font-size:13px;font-weight:600}
-.wrap{max-width:1200px;margin:0 auto;padding:16px 24px;display:grid;grid-template-columns:1fr 340px;gap:18px}
-.form-group{margin-bottom:10px}.form-group label{font-size:11px;font-weight:700;display:block;margin-bottom:4px}.form-group input,.form-group textarea,.form-group select{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:8px;background:#F9F8F5;font-size:12px;outline:none}
-.vehicle-card{border:1px solid var(--border);background:#F9F8F5;border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;cursor:pointer;margin-bottom:6px;font-size:12px}.vehicle-card.selected{border-color:var(--teal);background:var(--teal-light)}
-.timeline{display:flex;flex-direction:column;gap:8px}.t-item{display:flex;gap:8px;font-size:11px}.dot{width:20px;height:20px;border-radius:50%;background:white;border:1px solid var(--border);display:grid;place-items:center;font-size:9px}.t-item.active.dot{background:var(--navy);color:white}
-.success{display:none;margin-top:10px;padding:10px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;text-align:center;font-size:12px}.badge-track{background:var(--navy);color:white;padding:5px 10px;border-radius:999px;font-weight:800;display:inline-block;margin-top:6px;font-size:12px;letter-spacing:1px}
-.hidden{display:none} @media(max-width:900px){.hero{grid-template-columns:1fr}.wrap{grid-template-columns:1fr}}
-.form-group input:focus,.form-group textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px var(--teal-light)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#f6f8fb;color:#0f172a}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e2e8f0;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.brand{font-weight:800;display:flex;gap:8px;align-items:center}.brand span{font-size:10px;background:#14b8a6;color:#fff;padding:3px 7px;border-radius:999px}
+.pill{display:flex;gap:4px;background:#eef2f7;padding:4px;border-radius:999px}.pill button{border:0;padding:7px 14px;border-radius:999px;background:transparent;cursor:pointer;font-weight:600;font-size:13px}.pill button.active{background:#0f172a;color:#fff}
+.searchBar{display:flex;gap:6px;align-items:center;background:#fff;border:1px solid #e2e8f0;padding:5px 8px;border-radius:999px}.searchBar input{border:0;outline:0;width:170px;font-size:12px}.btnTrack{background:#14b8a6;color:#fff;border:0;padding:6px 12px;border-radius:999px;font-weight:700;cursor:pointer}
+.hero{padding:18px 24px;display:grid;grid-template-columns:1.2fr.8fr;gap:18px}
+.hero h1{font-size:44px;line-height:.9;letter-spacing:-1px;font-weight:800}.hero h1 span{color:#14b8a6}
+.card{background:#fff;border-radius:18px;padding:16px;border:1px solid #eef2f7;box-shadow:0 4px 20px rgba(0,0,0,.04);margin-bottom:12px}
+.route{border:1px dashed #cbd5e1;border-radius:14px;padding:12px;margin-top:10px}
+.input{width:100%;padding:11px;border:1px solid #e2e8f0;border-radius:12px;margin:6px 0;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.vehicle{border:2px solid #e2e8f0;border-radius:14px;padding:12px;text-align:center;cursor:pointer;background:#fff}.vehicle.active{border-color:#0f172a;background:#f8fafc}
+.badge{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;display:inline-block}
+.b-Processing{background:#fef9c3;color:#854d0e}.b-Pick-up{background:#dbeafe;color:#1e40af}.b-In-Transit{background:#e0e7ff;color:#4338ca}.b-Out-for-Delivery{background:#ffedd5;color:#9a3412}.b-Delivered{background:#dcfce7;color:#166534}.b-Cancelled{background:#fee2e2;color:#991b1b}.b-Booked-Rizal{background:#ccfbf1;color:#0f766e}
+.btn{background:#0f172a;color:#fff;border:0;padding:11px 16px;border-radius:12px;font-weight:700;cursor:pointer;width:100%}.btn-sm{padding:7px 10px;font-size:12px;border-radius:10px;width:auto}.btn-outline{background:#fff;color:#0f172a;border:1px solid #cbd5e1}.btn-danger{background:#ef4444;color:#fff}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:60}.modal.show{display:flex}.modal-box{background:#fff;border-radius:16px;padding:18px;width:92%;max-width:400px}
+.hidden{display:none}.star{font-size:26px;color:#e2e8f0;cursor:pointer}.star.active{color:#f59e0b}.small{font-size:12px;color:#64748b}
+.tabsContent{padding:0 24px 24px}.loginFull{position:fixed;inset:0;z-index:100;background:#f6f8fb;display:flex;align-items:center;justify-content:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<nav>
-<div class="logo"><span>LY</span> Layag Rizal <span style="background:var(--teal);color:white;padding:3px 8px;border-radius:999px;font-size:9px">RIZAL ONLY</span></div>
-<div class="mode"><button id="bCust" class="active" onclick="switchMode('customer')">Customer</button><button id="bRider" onclick="switchMode('rider')">Rider</button><button id="bTrack" onclick="switchMode('track')">Tracking</button></div>
-<div><button class="btn btn-teal" style="font-size:12px" onclick="document.getElementById('customerApp').scrollIntoView({behavior:'smooth'})">Book a delivery</button></div>
-</nav>
-
-<div class="track-bar">
-<b style="font-size:12px">🔍 Track Rizal Delivery:</b>
-<div class="input"><input id="trackInput" placeholder="Enter LAYAG-RIZAL-XXXX"><button class="btn btn-teal" style="padding:6px 14px;font-size:11px" onclick="trackParcel()">Track</button></div>
-<small style="color:var(--muted);font-size:11px" id="trackHint">Book first to get ID</small>
-</div>
-<div id="trackingResult" style="display:none;padding:16px 24px"></div>
-
-<div id="customerApp">
-<div class="hero">
-<div><h1>Deliver better<br>in <span>Rizal.</span></h1><p style="color:var(--muted);font-size:13px;margin:10px 0">Web-Based Courier and Logistics Tracking System for Rizal Province. 14 towns covered.</p>
-<div class="card"><div style="font-size:9px;letter-spacing:2px;color:var(--teal);font-weight:800;text-align:center;margin-bottom:8px">YOUR RIZAL ROUTE PLANNED</div>
-<div class="route-field">📍 <select id="routePickup" onchange="sync()"><option>Antipolo City, Rizal</option><option>Cainta, Rizal</option><option selected>Taytay, Rizal</option><option>Angono, Rizal</option><option>Binangonan, Rizal</option><option>San Mateo, Rizal</option><option>Rodriguez, Rizal</option><option>Tanay, Rizal</option><option>Morong, Rizal</option><option>Baras, Rizal</option></select></div>
-<div class="route-field">📍 <select id="routeDropoff" onchange="sync()"><option>Antipolo City, Rizal</option><option selected>Cainta, Rizal</option><option>Taytay, Rizal</option><option>Angono, Rizal</option><option>Binangonan, Rizal</option><option>San Mateo, Rizal</option><option>Rodriguez, Rizal</option><option>Tanay, Rizal</option><option>Morong, Rizal</option><option>Baras, Rizal</option></select></div>
-</div></div>
-<div class="card" style="background:var(--light-blue);font-size:11px"><b>Route Preview</b> - Rizal Only<br><div style="height:100px;margin-top:8px;background:linear-gradient(135deg,#EAF2F7,#F6F5EF);border-radius:10px;display:grid;place-items:center">🗺️ Taytay → Cainta<br>12.4 km • Rizal</div><div style="margin-top:8px">✓ 14 towns • Local riders • Tracking included</div></div>
-</div>
-<div class="wrap">
-<div class="card" id="deliveryForm"><h3 style="font-size:14px">📦 Book a Delivery - Rizal Only</h3>
-<form id="deliveryBookingForm" style="margin-top:10px">
-<div class="form-group"><label>Sender Name</label><input id="senderName" required placeholder="Juan - Taga Rizal"></div>
-<div class="form-group"><label>Receiver Name</label><input id="receiverName" required></div>
-<div class="form-group"><label>Pickup - Rizal + Brgy</label><textarea id="pickupAddress" required>Taytay, Rizal - Brgy. Dolores, Rizal Ave.</textarea></div>
-<div class="form-group"><label>Delivery - Rizal + Brgy</label><textarea id="deliveryAddress" required>Cainta, Rizal - Brgy. San Andres, A. Bonifacio St.</textarea></div>
-<div class="form-group"><label>Vehicle</label><div class="vehicle-card selected" onclick="setPkg('Small Parcel',this)"><b>LY Car - Rizal</b><span style="font-size:9px;background:var(--navy);color:white;padding:2px 6px;border-radius:999px">BEST</span></div><div class="vehicle-card" onclick="setPkg('Document',this)"><b>LY Moto</b><span>Select</span></div><select id="packageType" style="display:none"><option selected>Small Parcel</option></select></div>
-<div class="form-group"><label>Package Description</label><textarea id="packageDescription" required>Medium box / 8 kg</textarea></div>
-<button type="submit" class="btn btn-navy" style="width:100%">Submit Booking</button>
-</form>
-<div class="success" id="successMessage"></div>
-</div>
-<div><div class="card" style="background:var(--light-blue)"><b>Shipment <span id="liveId">LY-2048</span> <span style="color:var(--teal)">RIZAL</span></b><div class="timeline" style="margin-top:10px"><div class="t-item active"><div class="dot">✓</div><div><b>Driver matched - Taga Rizal</b></div></div><div class="t-item"><div class="dot">○</div><div>Package collected</div></div><div class="t-item"><div class="dot">○</div><div>Proof VERIFIED</div></div></div></div></div>
+<div id="loginScreen" class="loginFull">
+<div class="modal-box" style="max-width:360px">
+<div class="brand" style="justify-content:center;margin-bottom:12px">Layag Rizal <span>RIZA ONLY</span></div>
+<h3 style="text-align:center">Login</h3>
+<p class="small" style="text-align:center;margin:6px 0">Welcome to Layag Rizal Delivery</p>
+<input id="lEmail" class="input" placeholder="Email" value="juan@layag.com">
+<div style="position:relative"><input id="lPass" type="password" class="input" placeholder="Password" value="123"><span onclick="document.getElementById('lPass').type=document.getElementById('lPass').type==='password'?'text':'password'" style="position:absolute;right:12px;top:14px;cursor:pointer">👁️</span></div>
+<select id="lRole" class="input"><option>Customer</option><option>Rider</option><option>Admin</option></select>
+<button class="btn" onclick="doLogin()">Login</button>
 </div>
 </div>
 
-<div id="riderApp" class="hidden">
-<div class="wrap">
-<div>
-<div class="card"><div style="display:flex;justify-content:space-between"><h4>Good morning, Ana - Rizal Rider</h4><span style="background:var(--teal-light);color:var(--teal);padding:3px 8px;border-radius:999px;font-size:9px;font-weight:800">ONLINE • RIZAL</span></div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0;font-size:11px"><div style="background:#F9F8F5;padding:10px;border-radius:8px;text-align:center;border:1px solid var(--border)"><small>EARNINGS</small><br><b>₱<span id="earn">1240</span></b></div><div style="background:#F9F8F5;padding:10px;border-radius:8px;text-align:center;border:1px solid var(--border)"><small>COMPLETED</small><br><b id="comp">6</b></div><div style="background:#F9F8F5;padding:10px;border-radius:8px;text-align:center;border:1px solid var(--border)"><small>RIZAL TRIPS</small><br><b>14 towns</b></div></div>
-<button class="btn btn-ghost" style="width:100%;font-size:12px" onclick="loadOffers()">Load Rizal offers from localStorage</button>
-<div id="offersBox" style="margin-top:12px"></div>
+<div class="top">
+<div class="brand">Layag Rizal <span>RIZA ONLY</span> <span id="roleBadge" class="small" style="background:#0f172a"></span></div>
+<div class="pill">
+<button class="active" id="b-customer" onclick="switchTab('customer',this)">Customer</button>
+<button id="b-rider" onclick="switchTab('rider',this)">Rider</button>
+<button id="b-tracking" onclick="switchTab('tracking',this)">Tracking</button>
+<button id="b-parcels" onclick="switchTab('parcels',this)">Parcels</button>
+<button onclick="switchTab('profile',this)">Profile</button>
+<button id="b-admin" onclick="switchTab('admin',this)">Admin</button>
 </div>
-<div id="activeBox" class="card hidden" style="margin-top:12px"><b id="activeId">Delivery LY-XXXX</b><p style="font-size:12px;margin:6px 0">Recipient: <b id="activeRec">-</b></p><div class="timeline"><div class="t-item active"><div class="dot">✓</div><div>Package collected in Rizal</div></div><div class="t-item" id="s2"><div class="dot">○</div><div>Navigate in Rizal</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><div style="border:1px dashed var(--border);border-radius:10px;padding:16px;text-align:center;background:#F9F8F5;font-size:11px" onclick="this.textContent='📸 Added'">+ Photo proof</div><div style="border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;background:#F9F8F5"><input id="codeInput" placeholder="Code" style="border:none;background:transparent;text-align:center;width:100%;outline:none;font-size:12px"><br><small style="font-size:10px">Secure code</small></div></div><button class="btn btn-navy" style="width:100%;margin-top:10px;font-size:12px" onclick="completeDelivery()">Mark as delivered - Rizal</button></div>
-</div>
-<div><div class="card" style="font-size:11px"><b>Weekly - Rizal</b><br><b style="font-size:18px">₱6,480</b><br><small style="color:var(--muted)">14 towns covered</small></div></div>
-</div>
+<div class="searchBar">🔍 Track: <input id="topTrack" placeholder="LAYAG-RIZAL-XXXXXX"><button class="btnTrack" onclick="trackTop()">Track</button> <button class="btn-sm btn-outline" onclick="logout()">Logout</button></div>
 </div>
 
-<div id="trackApp" class="hidden" style="padding:24px"><div class="card"><h3>📍 Tracking History - Rizal Only</h3><p style="font-size:11px;color:var(--muted);margin:6px 0">All bookings saved in browser</p><div id="historyList" style="margin-top:12px"></div></div></div>
+<div id="tab-customer" class="tabsContent"><div class="hero"><div>
+<h1>Deliver better<br>in <span>Rizal.</span></h1><p class="small">Web-Based Courier and Logistics Tracking System for Rizal Province.</p>
+<div class="card"><div class="small" style="letter-spacing:2px;font-weight:800;color:#14b8a6;text-align:center">YOUR RIZAL ROUTE PLANNED</div><div class="route">📍 Pick-up<select id="pickup" class="input" onchange="updateRoute()"><option>Taytay, Rizal</option><option>Cainta, Rizal</option><option>Antipolo, Rizal</option><option>Angono, Rizal</option><option>Binangonan, Rizal</option></select>📍 Drop-off<select id="dropoff" class="input" onchange="updateRoute()"><option>Cainta, Rizal</option><option>Taytay, Rizal</option><option>Antipolo, Rizal</option><option>Angono, Rizal</option></select></div></div>
+<div class="card"><b>📦 Book a Delivery - Rizal Only</b><div class="grid2" style="margin-top:8px"><div>Sender<input id="sender" class="input" value="Juan"></div><div>Receiver<input id="receiver" class="input" value="Maria"></div></div>Weight (kg)<input id="weight" type="number" min="0" value="2" class="input" oninput="calcFee()">Item<input id="item" class="input" placeholder="Documents"><div class="grid3" style="margin-top:8px"><div class="vehicle active" id="veh-motorcycle" onclick="selectVeh('Motorcycle')">🏍️<br><b>Moto</b><div class="small">₱65</div></div><div class="vehicle" id="veh-car" onclick="selectVeh('Car')">🚗<br><b>Car</b><div class="small">₱165</div></div><div class="vehicle" id="veh-van" onclick="selectVeh('Van')">🚐<br><b>Van</b><div class="small">₱265</div></div></div><div class="grid2" style="margin-top:10px"><div><span class="small">Fixed Rider</span><select id="riderOpt" class="input"><option>Auto Assign Rider</option><option>Fixed Rider - Kuya Jay</option></select></div><div><span class="small">Payment Method</span><select id="pay" class="input"><option>Cash</option><option>Card</option><option>E-Wallet</option></select></div></div><button class="btn" onclick="createBooking()" style="margin-top:8px">Confirm Booking - ₱<span id="fee">165</span></button><span id="createMsg" class="small"></span></div></div><div><div class="card"><b>Route Preview</b><div class="small" id="routePreview" style="margin-top:6px"></div><div style="margin-top:12px;height:140px;background:#f1f5f9;border-radius:12px;display:flex;align-items:center;justify-content:center" class="small">Map Preview (Rizal Only)</div></div><div class="card"><b>Shipment</b><div class="small">Fee = base + max(0,w-5)*10</div><div style="margin-top:8px"><span class="badge b-Booked-Rizal">Rizal Only</span> <span id="shipmentFee" style="font-weight:800"></span></div><div id="latest" style="margin-top:12px"></div></div></div></div></div>
 
-<footer style="background:var(--navy);color:white;text-align:center;padding:14px;font-size:11px">© 2026 Layag Rizal • Rizal Only (14 towns) • Customer + Rider + Tracking</footer>
+<div id="tab-rider" class="tabsContent hidden"><div class="card"><h3>Rider Dashboard</h3><div id="riderL" style="margin-top:10px"></div></div></div>
+<div id="tab-tracking" class="tabsContent hidden"><div class="card"><h3>Tracking Details</h3><input id="trackId" class="input" placeholder="LAYAG-RIZAL-XXXXXX"><button class="btn-sm btn" onclick="doTrack()">Track</button><div id="trackRes" style="margin-top:10px"></div></div></div>
+<div id="tab-parcels" class="tabsContent hidden"><div class="card"><h3>Parcels</h3><div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0"><button class="btn-sm btn" onclick="filterParcels('all')">All</button><button class="btn-sm btn-outline" onclick="filterParcels('Processing')">Processing</button><button class="btn-sm btn-outline" onclick="filterParcels('Delivered')">Delivered</button><button class="btn-sm btn-outline" onclick="showPayHist()">Payment History</button></div><div id="hist"></div><div id="payHist" class="hidden"></div></div></div>
+<div id="tab-profile" class="tabsContent hidden"><div class="card"><h3>Manage Profile</h3>Name<input id="pName" class="input">Email<input id="pEmail" class="input">Password<div style="position:relative"><input id="pPass" type="password" class="input"><span onclick="toggleEye()" style="position:absolute;right:12px;top:14px;cursor:pointer">👁️</span></div><button class="btn-sm btn" onclick="saveProfile()">Save</button> <span id="pMsg" class="small"></span></div></div>
+<div id="tab-admin" class="tabsContent hidden"><div class="card"><h3>Admin - All Bookings</h3><div id="adminL"></div></div></div>
+
+<div id="editM" class="modal"><div class="modal-box"><h4>Edit</h4><input id="ePick" class="input"><input id="eDrop" class="input"><input id="eW" type="number" min="0" class="input"><button class="btn-sm btn" onclick="doEdit()">Save</button> <button class="btn-sm btn-outline" onclick="closeM()">Cancel</button></div></div>
+<div id="rateM" class="modal"><div class="modal-box"><h4>Rate & Review</h4><div id="stars"><span class="star" onclick="setRate(1)">★</span><span class="star" onclick="setRate(2)">★</span><span class="star" onclick="setRate(3)">★</span><span class="star" onclick="setRate(4)">★</span><span class="star" onclick="setRate(5)">★</span></div><textarea id="rev" class="input" placeholder="Feedback"></textarea><button class="btn-sm btn" onclick="doRate()">Submit</button> <button class="btn-sm btn-outline" onclick="closeM()">Close</button></div></div>
 
 <script>
-function switchMode(m){
-  document.getElementById('customerApp').classList.toggle('hidden', m!=='customer');
-  document.getElementById('riderApp').classList.toggle('hidden', m!=='rider');
-  document.getElementById('trackApp').classList.toggle('hidden', m!=='track');
-  document.getElementById('bCust').classList.toggle('active', m==='customer');
-  document.getElementById('bRider').classList.toggle('active', m==='rider');
-  document.getElementById('bTrack').classList.toggle('active', m==='track');
-  if(m==='rider') loadOffers(); if(m==='track') loadHistory();
-}
-function sync(){
-  document.getElementById("pickupAddress").value=document.getElementById("routePickup").value+" - Brgy. Dolores, Rizal Ave.";
-  document.getElementById("deliveryAddress").value=document.getElementById("routeDropoff").value+" - Brgy. San Andres, A. Bonifacio St.";
-}
-function setPkg(v,el){document.getElementById("packageType").value=v;document.querySelectorAll('.vehicle-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected')}
+const distMatrix={"Taytay, Rizal-Cainta, Rizal":12.4,"Taytay, Rizal-Antipolo, Rizal":10.2,"Cainta, Rizal-Antipolo, Rizal":8.5,"Angono, Rizal-Binangonan, Rizal":6.1,"Taytay, Rizal-Angono, Rizal":9.3};
+function getDist(a,b){if(a===b)return 0;let k=a+'-'+b;let rk=b+'-'+a;if(distMatrix[k])return distMatrix[k];if(distMatrix[rk])return distMatrix[rk];let hash=(a.length*3 + b.length*2) % 8 + 5;return parseFloat((hash + 0.3).toFixed(1));}
+function badgeClass(s){return 'badge b-'+s.replace(/ /g,'-');}
+function getBookings(){let a=JSON.parse(localStorage.getItem('layag_books')||'[]');let b=JSON.parse(localStorage.getItem('layag_bookings')||'[]');return a.length>=b.length?a:b;}
+function saveBookings(){localStorage.setItem('layag_books',JSON.stringify(bookings));localStorage.setItem('layag_bookings',JSON.stringify(bookings));}
+let API_BASE=localStorage.getItem('layag_base')||'https://api.layag.com/api';
+let selected='Motorcycle',fee=165,editIdx=null,rateIdx=null,curRate=0,filter='all';
+let user=JSON.parse(localStorage.getItem('layag_user')||'null');
+let bookings=getBookings();
+if(!user){document.getElementById('loginScreen').style.display='flex';}else{ document.getElementById('loginScreen').style.display='none'; document.getElementById('roleBadge').innerText=user.role; }
 
-document.getElementById("deliveryBookingForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  if(document.getElementById("routePickup").value===document.getElementById("routeDropoff").value){ alert("Pickup and Delivery cannot be same town!"); return; }
-
-  let bookings=JSON.parse(localStorage.getItem("layag_bookings")||"[]");
-  let trackingId;
-  do{ trackingId="LAYAG-RIZAL-"+Math.floor(1000+Math.random()*9000); }while(bookings.some(b=>b.trackingId===trackingId));
-
-  const bookingData={
-    trackingId,
-    senderName:document.getElementById("senderName").value,
-    receiverName:document.getElementById("receiverName").value,
-    pickupAddress:document.getElementById("pickupAddress").value,
-    deliveryAddress:document.getElementById("deliveryAddress").value,
-    packageType:document.getElementById("packageType").value,
-    packageDescription:document.getElementById("packageDescription").value,
-    date:new Date().toLocaleString(),
-    status:"Booked - Rizal",
-    province:"Rizal Only"
-  };
-  bookings.unshift(bookingData);
-  localStorage.setItem("layag_bookings",JSON.stringify(bookings));
-  document.getElementById("liveId").textContent=trackingId;
-  document.getElementById("trackInput").value=trackingId;
-  document.getElementById("trackHint").textContent="ID copied! Click Track now";
-  const box=document.getElementById("successMessage");
-  box.style.display="block";
-  box.innerHTML=`✅ Rizal booking submitted!<br><span class="badge-track">${trackingId}</span><br><small>Saved in browser. Go to Tracking tab to search.</small>`;
-  setTimeout(()=>{ box.style.display="none"; },5000);
-});
-
-function trackParcel(){
-  const id=document.getElementById("trackInput").value.trim().toUpperCase();
-  const resultDiv=document.getElementById("trackingResult");
-  if(!id){alert("Enter LAYAG-RIZAL-XXXX");return}
-  const bookings=JSON.parse(localStorage.getItem("layag_bookings")||"[]");
-  const found=bookings.find(b=>b.trackingId.toUpperCase()===id);
-  if(!found){resultDiv.style.display="block"; resultDiv.innerHTML=`<div class="card" style="background:#FEF2F2;border-color:#FCA5A5"><b>❌ Not found: ${id}</b><br><small>Book in Rizal first. Total in browser: ${bookings.length}</small></div>`; return}
-  resultDiv.style.display="block";
-  resultDiv.innerHTML=`<div class="card" style="border-color:var(--teal)"><div style="display:flex;justify-content:space-between"><b>${found.trackingId} <span style="color:var(--teal)">${found.status}</span></b><span style="font-size:9px;background:var(--teal-light);padding:3px 7px;border-radius:999px">RIZAL TRACKING</span></div>
-  <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px"><div><small>Sender</small><br><b>${found.senderName}</b></div><div><small>Receiver</small><br><b>${found.receiverName}</b></div><div><small>Pickup</small><br>${found.pickupAddress}</div><div><small>Delivery</small><br>${found.deliveryAddress}</div></div>
-  <div class="timeline" style="margin-top:12px"><div class="t-item active"><div class="dot">✓</div><div><b>Booked</b> - ${found.date}</div></div><div class="t-item active"><div class="dot">✓</div><div><b>Driver matched - Taga Rizal</b></div></div><div class="t-item"><div class="dot">○</div><div><b>Out for delivery in Rizal</b></div></div><div class="t-item"><div class="dot">○</div><div><b>Proof VERIFIED</b></div></div></div></div>`;
-  resultDiv.scrollIntoView({behavior:"smooth"});
+async function doLogin(){
+ let email=document.getElementById('lEmail').value.trim(), pass=document.getElementById('lPass').value, role=document.getElementById('lRole').value;
+ let payload={email,password:pass,role};
+ try{ let r=await fetch(API_BASE+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); let d=await r.json(); if(r.ok) payload={...payload,...d}; }catch(e){ console.warn('Offline login, local fallback'); }
+ localStorage.setItem('layag_user',JSON.stringify({name:email.split('@')[0],email,role}));
+ document.getElementById('loginScreen').style.display='none';
+ document.getElementById('roleBadge').innerText=role;
+ document.getElementById('pName').value=email.split('@')[0]; document.getElementById('pEmail').value=email;
+ if(role==='Rider') switchTab('rider',document.getElementById('b-rider')); else if(role==='Admin') switchTab('admin',document.getElementById('b-admin')); else switchTab('customer',document.getElementById('b-customer'));
+ render();
 }
-
-function loadOffers(){
-  const bookings=JSON.parse(localStorage.getItem("layag_bookings")||"[]");
-  const box=document.getElementById("offersBox");
-  if(bookings.length===0){box.innerHTML=`<small style="color:var(--muted)">No Rizal bookings. Book in Customer tab first.</small>`;return}
-  const latest=bookings[0];
-  box.innerHTML=`<div style="border:2px solid var(--navy);border-radius:12px;padding:12px;background:white;position:relative"><span style="position:absolute;top:8px;right:8px;background:var(--navy);color:white;padding:3px 7px;border-radius:999px;font-size:9px" id="timer">00:22</span><span style="background:var(--navy);color:white;padding:2px 6px;border-radius:999px;font-size:9px">NEW RIZAL OFFER</span><div style="margin-top:6px;font-size:12px"><b>${latest.trackingId}</b><br>📍 ${latest.pickupAddress}<br>📍 ${latest.deliveryAddress}<br>₱165 • Rizal Only</div><div style="display:flex;gap:6px;margin-top:8px"><button class="btn btn-ghost" style="flex:1;font-size:11px" onclick="this.closest('div').parentElement.remove()">Skip</button><button class="btn btn-navy" style="flex:1;font-size:11px" data-id="${latest.trackingId}" onclick="accept(this.dataset.id)">Accept</button></div></div>`;
-  let sec=22; const iv=setInterval(()=>{sec--; const el=document.getElementById('timer'); if(el) el.textContent=`00:${String(sec).padStart(2,'0')}`; if(sec<=0) clearInterval(iv)},1000);
+function logout(){ localStorage.removeItem('layag_user'); location.reload(); }
+function switchTab(id,btn){document.querySelectorAll('.tabsContent').forEach(e=>e.classList.add('hidden'));document.getElementById('tab-'+id).classList.remove('hidden');document.querySelectorAll('.pill button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');render();}
+function selectVeh(v){selected=v;document.querySelectorAll('.vehicle').forEach(e=>e.classList.remove('active'));document.getElementById('veh-'+v.toLowerCase()).classList.add('active');calcFee();}
+function calcFee(){let w=Math.max(0,parseFloat(document.getElementById('weight').value)||0);let base=selected==='Motorcycle'?65:selected==='Car'?165:265;fee=base+Math.max(0,w-5)*10;document.getElementById('fee').innerText=fee;document.getElementById('shipmentFee').innerText='₱'+fee+' | '+w+'kg | '+selected;}
+function updateRoute(){let a=document.getElementById('pickup').value,b=document.getElementById('dropoff').value,d=getDist(a,b);document.getElementById('routePreview').innerHTML=a.split(',')[0]+' → '+b.split(',')[0]+'<br>'+d+' km • Rizal Province';calcFee();}
+async function tryApi(p){try{let r=await fetch(API_BASE+'/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});let d=await r.json();if(!r.ok)throw new Error();return d;}catch(e){return null;}}
+async function createBooking(){let w=Math.max(0,parseFloat(document.getElementById('weight').value)||0);let a=document.getElementById('pickup').value,b=document.getElementById('dropoff').value;let id='LAYAG-RIZAL-'+Date.now().toString().slice(-6);let payload={trackingId:id,tracking_id:id,pickup:a,dropoff:b,sender:document.getElementById('sender').value,receiver:document.getElementById('receiver').value,weight:w,item:document.getElementById('item').value,transportation:selected,deliveryFee:fee,fee:fee,paymentMethod:document.getElementById('pay').value,payment_method:document.getElementById('pay').value,riderOption:document.getElementById('riderOpt').value,fixedRider:document.getElementById('riderOpt').value,status:'Processing',createdAt:new Date().toISOString(),rating:null,review:null,distance:getDist(a,b)};let api=await tryApi(payload);if(api&&api.trackingId)payload={...payload,...api};bookings.unshift(payload);saveBookings();document.getElementById('createMsg').innerText=' ✅ '+id;render();}
+function render(){
+ document.getElementById('latest').innerHTML=bookings.slice(0,2).map(b=>`<div class="card" style="background:#f8fafc;padding:10px"><b>${b.trackingId}</b> ${b.pickup.split(',')[0]}→${b.dropoff.split(',')[0]} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">₱${b.deliveryFee} | ${b.paymentMethod} | ${b.fixedRider}</div></div>`).join('')||'<span class="small">No shipment</span>';
+ let list=filter==='all'?bookings:bookings.filter(b=>b.status===filter);
+ document.getElementById('hist').innerHTML=list.map(b=>{let idx=bookings.indexOf(b);return `<div class="card"><b>${b.trackingId}</b> ${b.transportation} ₱${b.deliveryFee} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">${b.pickup}→${b.dropoff} | ${b.weight}kg | ${b.paymentMethod} | ${b.fixedRider}</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${b.status==='Processing'?`<button class="btn-sm btn-outline" onclick="openEdit(${idx})">Edit</button><button class="btn-sm btn-outline" onclick="resched(${idx})">Resched</button><button class="btn-sm btn-danger" onclick="cancelB(${idx})">Cancel</button>`:''}${b.status==='Delivered'&&!b.rating?`<button class="btn-sm btn" onclick="openRate(${idx})">Rate</button>`:''}${b.rating?`<span class="small">⭐${b.rating} ${b.review||''}</span>`:''}</div></div>`}).join('')||'<span class="small">No parcels</span>';
+ document.getElementById('riderL').innerHTML=bookings.filter(b=>b.status!=='Cancelled').map(b=>{let idx=bookings.indexOf(b);return `<div class="card"><b>${b.trackingId}</b> ${b.pickup.split(',')[0]}→${b.dropoff.split(',')[0]} - ${b.fixedRider}<br><select class="input" onchange="updateStatus(${idx},this.value)"><option ${b.status==='Processing'?'selected':''}>Processing</option><option ${b.status==='Pick-up'?'selected':''}>Pick-up</option><option ${b.status==='In Transit'?'selected':''}>In Transit</option><option ${b.status==='Out for Delivery'?'selected':''}>Out for Delivery</option><option ${b.status==='Delivered'?'selected':''}>Delivered</option></select></div>`}).join('')||'<span class="small">No assigned</span>';
+ document.getElementById('adminL').innerHTML=bookings.map(b=>`<div class="card"><b>${b.trackingId}</b> ${b.sender}→${b.receiver} <span class="${badgeClass(b.status)}">${b.status}</span> ₱${b.deliveryFee} ${b.paymentMethod}</div>`).join('')||'<span class="small">No data</span>';
 }
-function accept(id){
-  const bookings=JSON.parse(localStorage.getItem("layag_bookings")||"[]");
-  const f=bookings.find(b=>b.trackingId===id);
-  document.getElementById('activeBox').classList.remove('hidden');
-  document.getElementById('activeId').textContent=id;
-  document.getElementById('activeRec').textContent=f?f.receiverName:'-';
-  document.getElementById('offersBox').innerHTML='';
-}
-function completeDelivery(){
-  const code=document.getElementById('codeInput').value; if(!code){alert('Enter code');return}
-  alert('✅ Rizal delivery VERIFIED! Code '+code);
-  document.getElementById('earn').textContent=parseInt(document.getElementById('earn').textContent)+165;
-  document.getElementById('comp').textContent=parseInt(document.getElementById('comp').textContent)+1;
-  document.getElementById('activeBox').classList.add('hidden');
-}
-function loadHistory(){
-  const bookings=JSON.parse(localStorage.getItem("layag_bookings")||"[]");
-  const list=document.getElementById("historyList");
-  if(bookings.length===0){list.innerHTML='<small>No bookings yet</small>';return}
-  list.innerHTML=bookings.map(b=>`<div style="border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:6px;background:#F9F8F5;font-size:11px"><b>${b.trackingId}</b> - ${b.pickupAddress.split(',')[0]} → ${b.deliveryAddress.split(',')[0]}<br><small>${b.date} • ${b.status} • ${b.senderName} → ${b.receiverName}</small></div>`).join('');
-}
+function filterParcels(f){filter=f;document.getElementById('payHist').classList.add('hidden');document.getElementById('hist').classList.remove('hidden');render();}
+function showPayHist(){document.getElementById('hist').classList.add('hidden');document.getElementById('payHist').classList.remove('hidden');document.getElementById('payHist').innerHTML=bookings.map(b=>`<div class="card"><b>${b.trackingId}</b> ${b.paymentMethod} ₱${b.deliveryFee} <span class="${badgeClass(b.status)}">${b.status}</span><div class="small">${new Date(b.createdAt).toLocaleString()}</div></div>`).join('');}
+function trackTop(){let id=document.getElementById('topTrack').value.trim();document.getElementById('trackId').value=id;switchTab('tracking',document.getElementById('b-tracking'));doTrack();}
+function doTrack(){let id=document.getElementById('trackId').value.trim();let b=bookings.find(x=>x.trackingId===id||x.tracking_id===id);document.getElementById('trackRes').innerHTML=b?`<div class="card"><b>${b.trackingId}</b> <span class="${badgeClass(b.status)}">${b.status}</span><div>${b.pickup}→${b.dropoff}</div><div class="small">${b.distance}km | ₱${b.deliveryFee} | ${b.paymentMethod}</div></div>`:'<span class="small">Not found</span>';}
+function openEdit(i){editIdx=i;document.getElementById('ePick').value=bookings[i].pickup;document.getElementById('eDrop').value=bookings[i].dropoff;document.getElementById('eW').value=bookings[i].weight;document.getElementById('editM').classList.add('show');}
+function doEdit(){if(editIdx!==null){bookings[editIdx].pickup=document.getElementById('ePick').value;bookings[editIdx].dropoff=document.getElementById('eDrop').value;bookings[editIdx].weight=Math.max(0,parseFloat(document.getElementById('eW').value)||0);let base=bookings[editIdx].transportation==='Motorcycle'?65:bookings[editIdx].transportation==='Car'?165:265;bookings[editIdx].deliveryFee=base+Math.max(0,bookings[editIdx].weight-5)*10;bookings[editIdx].fee=bookings[editIdx].deliveryFee;bookings[editIdx].distance=getDist(bookings[editIdx].pickup,bookings[editIdx].dropoff);saveBookings();closeM();render();}}
+function cancelB(i){if(confirm('Cancel?')){bookings[i].status='Cancelled';saveBookings();render();}}
+function resched(i){let d=prompt('New schedule?');if(d){bookings[i].rescheduled=d;saveBookings();render();}}
+function openRate(i){rateIdx=i;curRate=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('active'));document.getElementById('rateM').classList.add('show');}
+function setRate(n){curRate=n;document.querySelectorAll('.star').forEach((s,idx)=>s.classList.toggle('active',idx<n));}
+function doRate(){if(rateIdx!==null){bookings[rateIdx].rating=curRate||5;bookings[rateIdx].review=document.getElementById('rev').value;saveBookings();closeM();render();}}
+function updateStatus(i,v){bookings[i].status=v;saveBookings();render();}
+function closeM(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show'));}
+function saveProfile(){let n=document.getElementById('pName').value,e=document.getElementById('pEmail').value;let u=JSON.parse(localStorage.getItem('layag_user')||'{}');u.name=n;u.email=e;localStorage.setItem('layag_user',JSON.stringify(u));document.getElementById('pMsg').innerText=' Saved';}
+function toggleEye(){let el=document.getElementById('pPass');el.type=el.type==='password'?'text':'password';}
+updateRoute();render();
 </script>
 </body>
 </html>
